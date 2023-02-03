@@ -1,0 +1,10 @@
+// job types : base 101
+export const JOB_TYPE_CREATE_ACC_EMAIL_PASS=111;
+
+export const JOB_TYPE_ACC_GOOGLE_AUTH=222;
+
+export const JOB_TYPE_IS_NODE_AVAILABLE=333;
+
+export const JOB_TYPE_SIGNIN_EMAIL_PASS=444;
+
+export const JOB_TYPE_UPLOAD_FILE_TO_STORAGE=555;
