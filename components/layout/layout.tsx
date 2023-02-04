@@ -77,7 +77,7 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
         <nav className="">
 
             {/* Upper Nav*/}
-            <div className="flex justify-between py-2 max-w-7xl mx-auto">
+            <div className="flex justify-between md:py-2 max-w-7xl mx-auto">
                 {/*Left Side*/}
                 <div className="flex items-center md:space-x-4">
 
@@ -318,7 +318,7 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
         {/*End of Nav Bar*/}
 
         <main>{children}</main>
-        
+
         {/*pass the props to childred*/}
         {/*end of children*/}
 
