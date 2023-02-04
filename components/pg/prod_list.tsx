@@ -16,11 +16,12 @@ import { getDatabase, ref, onValue} from "firebase/database";
 import {initFirebase} from "@lib/firebase_db/firebase_init";
 import Link from 'next/link';
 
+
 function ProdList({ trendingProducts,cartButtonColors,ip,header }: { trendingProducts: PRODUCTMODEL[],cartButtonColors:any,ip:any,header:any }) {
     //console.log("testing context.req.header here ");
     //console.log(header);
     //console.log();
-
+    const router = useRouter();
     const {user,dbuser} = useAuth();
     const [tempCartBbColor,setTempCartBgColor ] = useState(cartButtonColors);
 
@@ -57,11 +58,19 @@ function ProdList({ trendingProducts,cartButtonColors,ip,header }: { trendingPro
 
     const addProductToCart=(selectedProduct:PRODUCTMODEL)=>{
         if(dbuser===null){
-            console.log("user is null");
+            //console.log("user is null");
+            const goToLogin = confirm(
+              'Login or Create an account to shop?',
+            );
+            if (goToLogin) {
+                router.push('/auth/login/');
+            }
             return;
         }
         let path:string = REALTIME_DATABASE_DB_CART_PRODUCTS+dbuser['uid']+"/"+selectedProduct.productId;
         saveNodePathWithBoolean(path,true);
+
+        setTempCartBgColor({...tempCartBbColor,[selectedProduct.productId]:'bg-slate-500'});
     }
 
     return (
@@ -105,7 +114,7 @@ function ProdList({ trendingProducts,cartButtonColors,ip,header }: { trendingPro
 
                               {/* add to cart button*/}
                               <div
-                                onClick={()=>{addProductToCart(product);setTempCartBgColor({...tempCartBbColor,[product.productId]:'bg-slate-500'});}}
+                                onClick={()=>{addProductToCart(product);}}
                                 className={`${tempCartBbColor[product.productId]} hover:cursor-pointer flex items-center justify-center rounded-md p-1 text-white`}>
                                 <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -160,7 +169,7 @@ function ProdList({ trendingProducts,cartButtonColors,ip,header }: { trendingPro
 
                               {/* add to cart button*/}
                               <div
-                                onClick={()=>{addProductToCart(product);setTempCartBgColor({...tempCartBbColor,[product.productId]:'bg-slate-500'});}}
+                                onClick={()=>{addProductToCart(product);}}
                                 className={`${tempCartBbColor[product.productId]} hover:cursor-pointer flex items-center justify-center rounded-md p-1 text-white`}>
                                 <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>

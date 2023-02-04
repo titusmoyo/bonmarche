@@ -23,6 +23,10 @@ export const LOGIN_PAGE_INDEX=40;
 export const PRODUCT_PAGE_INDEX=50;
 
 
+// Checkout Page
+export const CHECKOUT_PAGE_INDEX=60;
+
+
 // User DropDown Options
 export const USER_DROPDOWN_SETTINGS = 100;
 export const USER_DROPDOWN_SIGNOUT = 101;

@@ -80,3 +80,14 @@ export const saveNodePathWithBoolean = async (path:string,value:boolean)=>{
     //alert(err);
   });
 }
+
+
+/*
+Deletes a post from the database.
+*/
+export const deletePathFromFbDb = async (path:string) => {
+  initFirebase();
+  //return firebase.database().ref(`/posts/${slug}`).set(null);
+  const db = getDatabase();
+  return set(ref(db,path),null);
+};

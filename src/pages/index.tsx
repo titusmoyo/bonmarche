@@ -27,9 +27,9 @@ export default function Home({ trendingProducts,cartButtonColors,ip,header }: { 
 
       <main>
 
-        {/* Trending products*/}
+        {/* products*/}
         <ProdList trendingProducts={trendingProducts} cartButtonColors={cartButtonColors} ip={ip} header={header}/>
-        {/* End of Trending Products */}
+        {/* End of Products */}
 
       </main>
 
