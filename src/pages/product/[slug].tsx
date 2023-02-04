@@ -38,13 +38,12 @@ const ProductPage=({currentProduct,slug}:{currentProduct:PRODUCTMODEL,slug:any})
                 {/* First side*/}
                 <div className="flex flex-col items-center">
                     {/*Image Container*/}
-                    <div className="group h-60 w-[220px] relative">
-                        <Image
-                          src={currentProduct.mainImageUrl}
-                          alt="Picture of the author"
-                          fill
-                          className=""
-                        />
+                    <div className="group">
+                        <img
+                             src={currentProduct.mainImageUrl}
+                             alt={currentProduct.productName}
+                             className="h-70 w-auto object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
+                           />
                     </div>
 
                     <p>{currentProduct.productName}</p>

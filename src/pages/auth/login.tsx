@@ -108,7 +108,7 @@ const SignInPage = () => {
                         {/* logo */}
                         <div className="mb-3 flex justify-center items-center">
                             <Link
-                                href="/" className="hidden md:block">
+                                href="/" className="md:block">
                                 <FullLogo h={130} w={130}/>
                             </Link>
                         </div>

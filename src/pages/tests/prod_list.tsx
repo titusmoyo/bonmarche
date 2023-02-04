@@ -83,7 +83,7 @@ function ProdList({ trendingProducts,cartButtonColors,ip,header }: { trendingPro
                         <Link href={`/product/${product.productId}`}>
                             <img
                                  src={product.mainImageUrl}
-                                 alt="Picture of the author"
+                                 alt={product.productName}
                                  className="h-60 w-auto object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
                                />
                             <p>{product.productName}</p>
