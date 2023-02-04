@@ -303,8 +303,7 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
                 <Link href="/action/add">
                     <div
                         onMouseOver={()=>{setShowUserDropdown(false)}}
-                        className="mt-3 border px-4 py-1 rounded-md border-green-600 hover:cursor-pointer flex items-center justify-center">
-
+                        className="mb-3 mt-3 border px-4 py-1 rounded-md border-green-600 hover:cursor-pointer flex items-center justify-center">
                           Sell Something
                     </div>
                 </Link>
