@@ -105,6 +105,15 @@ const SignInPage = () => {
                 {/* registration form */}
                     <div className="bg-white p-3 w-11/12 md:w-5/12 rounded-md">
 
+                        <Link href="/">
+                            <div className="inline-flex rounded-md px-2 py-1 flex space-x-1 bg-cyan-50 hover:cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                                </svg>
+                                <div>Home</div>
+                            </div>
+                        </Link>
+
                         {/* logo */}
                         <div className="mb-3 flex justify-center items-center">
                             <Link

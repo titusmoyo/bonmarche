@@ -74,6 +74,20 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
          }
      }
 
+     /* handle clicks on the cart icon*/
+     const handleSellClick=()=>{
+         if(user===null){
+             //console.log("user is null");
+             const goToLogin = confirm(
+               'Login or Create an account to Sell products?',
+             );
+             if (goToLogin) {
+                 router.push('/auth/login/');
+             }
+             return;
+         }
+     }
+
   return (
     <div className="max-w-7xl mx-auto px-3 md:px-1">
         {/*Eevrythin goes below*/}
@@ -241,13 +255,12 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
 
 
                     {/*Sell Stuff : hides on mobile*/}
-                    <Link href="/action/add">
                         <div
+                            onClick={()=>{ handleSellClick();}}
                             onMouseOver={()=>{setShowUserDropdown(false)}}
                             className="hidden md:block border px-4 py-1 rounded-full border-green-600 hover:cursor-pointer">
                               Sell Something
                         </div>
-                    </Link>
 
                     {/*Shpping Cart*/}
                     {/*
@@ -311,13 +324,12 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
                 {/*End of Search Box*/}
 
                 {/*Sell Stuff : hides on mobile*/}
-                <Link href="/action/add">
                     <div
+                        onClick={()=>{ handleSellClick();}}
                         onMouseOver={()=>{setShowUserDropdown(false)}}
                         className="mb-3 mt-3 border px-4 py-1 rounded-md border-green-600 hover:cursor-pointer flex items-center justify-center">
                           Sell Something
                     </div>
-                </Link>
 
             </div>
 
