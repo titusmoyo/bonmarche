@@ -96,6 +96,7 @@ const CartPage =()=>{
 
             delete proda[selectedProduct.productId];
             setProda(proda);
+            router.push('/action/cart');
         }
     }
 
@@ -105,6 +106,17 @@ const CartPage =()=>{
             <div className="mt-4 mb-[140px]">
 
                 <h3 className="font-bold">Shopping Cart</h3>
+
+                {/* if cart is empty */}
+                {getTheTotalPrice()===0 && (
+                    <div className="mt-5 ">
+                        <div className="text-3xl font-bold">Your Cart is Empty</div>
+                        <Link href="/">
+                            <div className="hover:cursor-pointer inline-flex bg-cyan-300 w-[200px] rounded-md  mt-5 flex items-center justify-center px-4 py-4 font-bold">Go To Shop</div>
+                        </Link>
+                    </div>
+                )}
+                {/* End of empty cart*/}
 
                 <div className="mt-3 grid grid-cols-1 md:grid-cols-5 gap-2">
 

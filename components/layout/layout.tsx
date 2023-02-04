@@ -13,11 +13,13 @@ import { USER_DROPDOWN_SETTINGS } from '@utils/constants/layout_constants';
 import { USER_DROPDOWN_SIGNOUT } from '@utils/constants/layout_constants';
 import  CartValuesComponent  from '@components/layout/valuescomponent';
 import React from 'react';
+import { useRouter } from 'next/router';
 
 // Create the Context object
 // const LayoutContext = React.createContext();
 
 const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) => {
+    const router = useRouter();
     const {user,dbuser} = useAuth();
     const [showUserDropdown, setShowUserDropdown] = useState(false);
     const [showHamburgerOptions, setShowHamburgerOptions] = useState(false);
@@ -60,6 +62,15 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
              signOutUser();
          }else{
              console.log("else : USER_DROPDOWN");
+         }
+     }
+
+     /* handle clicks on the cart icon*/
+     const handleCartClick=()=>{
+         if(cartCount>0){
+             router.push('/action/cart');
+         }else{
+             alert("Your cart is empty, add some products first");
          }
      }
 
@@ -244,8 +255,9 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
                         icon-with-badge-tailwind.html
                     */}
                     <div className="">
-                        <Link href="/action/cart">
-                            <button className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out">
+                            <button
+                                onClick={()=>{handleCartClick();}}
+                                className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out">
                               <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                               </svg>
@@ -255,7 +267,6 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
                                 </div>
                               </span>
                             </button>
-                        </Link>
                     </div>
                     {/* End of Cart */}
 
