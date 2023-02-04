@@ -61,13 +61,6 @@ const CartPage =()=>{
                          }
                        });
 
-                       // updating the state
-                       //setCartProducts(tempList);
-                       //console.log("madhodha : "+tempList.length);
-                       //console.log(tempList);
-                       //setCartProducts((prevState: any) => (tempList));
-                       //setCartProducts((prevState) => (tempList));
-
                    }//end of if
                  });
              }
