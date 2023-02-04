@@ -108,11 +108,9 @@ const CheckoutPage=()=>{
 
         // if Cvv is incorrect show error
         if(!isCVVValid(cardValues.cvv)){
-            setShowCVVError(true);
+            setShowCVVError(true); 
             return;
         }
-
-
 
         console.log("credit card clicked ");
         console.log(cardValues);
