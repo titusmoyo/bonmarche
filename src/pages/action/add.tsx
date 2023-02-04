@@ -23,7 +23,6 @@ import { REALTIME_DATABASE_DB_PRODUCT_TYPE } from '@utils/constants/db_constants
 import { REALTIME_DATABASE_DB_PRODUCT_CONDITION } from '@utils/constants/db_constants';
 import { saveNodePathWithBoolean } from '@lib/firebase_db/firebase_writes';
 
-
 const AddPage =()=>{
     const router = useRouter();
     const {user, userLoading} = useAuth();
@@ -43,6 +42,7 @@ const AddPage =()=>{
         mainImageUrl:'',
         description:'',
         sellerId:'',
+        isTrending:false,
     });
 
     if (userLoading) {
@@ -158,8 +158,8 @@ const AddPage =()=>{
         saveNodePathWithBoolean(path_to_condition,true);
 
         // go to the main menu
-        alert("Product has been added successfully");
-
+        //alert("Product has been added successfully");
+        router.push('/');
       }else if(jobStatus.error){
         // handle error
       }

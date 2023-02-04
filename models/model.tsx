@@ -59,4 +59,5 @@ export interface PRODUCTMODEL{
     description:string,
     sellerId:string,
     dateCreated:any,
+    isTrending:boolean,
 };

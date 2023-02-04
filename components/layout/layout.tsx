@@ -74,7 +74,7 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
         <CartValuesComponent setCartCount={setCartCount} />
 
         {/*Nav Bar*/}
-        <nav className="">
+        <nav className="bg-white sticky top-0 z-50">
 
             {/* Upper Nav*/}
             <div className="flex justify-between md:py-2 max-w-7xl mx-auto">
@@ -315,7 +315,7 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
         </nav>
         {/*End of Nav Bar*/}
 
-        <main>{children}</main>
+        <main className="">{children}</main>
 
         {/*pass the props to childred*/}
         {/*end of children*/}
