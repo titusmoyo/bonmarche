@@ -122,8 +122,6 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
 
                 {/*Right Side*/}
                 <div className="flex items-center justify-center space-x-5 text-green-600">
-
-
                     {/* Conditional Buttons*/
                         user ?
                         (

@@ -33,7 +33,7 @@ const ProductPage=({currentProduct,slug}:{currentProduct:PRODUCTMODEL,slug:any})
 
     return(
         <Layout  childType={PRODUCT_PAGE_INDEX}>
-            <div className="grid grid-cols-1 md:gap-3 md:grid-cols-3 p-2 border rounded-lg pt-[10px] pb-[30px]">
+            <div className="mt-3 grid grid-cols-1 md:gap-3 md:grid-cols-3 p-2 border rounded-lg pt-[10px] pb-[30px]">
 
                 {/* First side*/}
                 <div className="flex flex-col items-center">

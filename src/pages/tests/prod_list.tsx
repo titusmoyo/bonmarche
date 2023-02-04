@@ -65,10 +65,10 @@ function ProdList({ trendingProducts,cartButtonColors,ip,header }: { trendingPro
     }
 
     return (
-        <Layout childType={0}>
+        <>
         <div className="max-w-7xl mx-auto px-3 md:px-1 mt-3 mb-[20px]">
             <h4>Trending List </h4>
-            <h4>ip address = {ip} </h4>
+            <h4 className="">ip address = {ip} </h4>
 
             {/*Trending Products*/}
             <div className="mt-5"></div>
@@ -79,18 +79,18 @@ function ProdList({ trendingProducts,cartButtonColors,ip,header }: { trendingPro
 
                 <div key={product.productId} className="border rounded-lg p-2 overflow-hidden">
 
-                    <div className="group cursor-pointer flex flex-col items-center justify-center">
-                        <Link href={`/product/${product.productId}`}>
-                            <img
-                                 src={product.mainImageUrl}
-                                 alt={product.productName}
-                                 className="h-60 w-auto object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
-                               />
-                            <p>{product.productName}</p>
-                        </Link>
-                    </div>
+                    <Link href={`/product/${product.productId}`}>
+                        <div className="group cursor-pointer flex flex-col items-center justify-center">
+                                <img
+                                     src={product.mainImageUrl}
+                                     alt={product.productName}
+                                     className="h-60 w-auto object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
+                                   />
+                                <p>{product.productName}</p>
+                        </div>
+                    </Link>
 
-                    <div  className="grid grid-cols-3 mt-2">
+                    <div  className="grid grid-cols-3 mt-2 items-center justify-center">
 
                       <p className="text-slate-800">{product.condition}</p>
 
@@ -107,7 +107,7 @@ function ProdList({ trendingProducts,cartButtonColors,ip,header }: { trendingPro
                         <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
-                        <div className="">Add To Cart</div>
+                        <div className="text-sm md:text-base">Add To Cart</div>
                       </div>
                       {/* End of cart */}
 
@@ -120,7 +120,7 @@ function ProdList({ trendingProducts,cartButtonColors,ip,header }: { trendingPro
 
             {/*End of Trending Products*/}
         </div>
-        </Layout>
+        </>
     );
 }
 
