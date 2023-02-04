@@ -21,6 +21,13 @@ const CheckoutPage=()=>{
     const [ cartProducts, setCartProducts ] = useState<PRODUCTMODEL[]>([]);
     const [ proda,setProda ] = useState<Record<string,PRODUCTMODEL>>({});
 
+    const [ cardValues, setCardValues] = useState({
+      cardNumber:'',
+      expiryDate:'',
+      cvv:'',
+      nameOnCard:'',
+    });
+
     useEffect(() => {
         // listening for changes in product cart
         // console.log(user);
@@ -72,9 +79,28 @@ const CheckoutPage=()=>{
       setPaymentOption(index);
     }
 
+    //listens to form data changes
+    const handleCardFormChanges = (e: { target: { id: any; value: any; }; }) => {
+      const id = e.target.id;
+      const newValue = e.target.value;
+      setCardValues({...cardValues, [id]: newValue });
+    };
+
+    const handleCreditCardSubmit=async(e: { preventDefault: () => void; })=>{
+        e.preventDefault();
+        console.log("credit card clicked ");
+        console.log(cardValues);
+        setCardValues({
+            cardNumber:'',
+             expiryDate:'',
+             cvv:'',
+             nameOnCard:'',
+         });
+    }
+
     return(
         <Layout childType={CHECKOUT_PAGE_INDEX}>
-            <div className="max-w-6xl mx-auto px-3">
+            <div className="max-w-6xl mx-auto px-3 mb-[130px]">
 
                 <div className="mt-3 mb-3">
 
@@ -143,32 +169,74 @@ const CheckoutPage=()=>{
                             </div>
 
 
-                            <div className="bg-slate-300 rounded-r-md p-3">
-                                <p className="mt-3 text-xl font-semibold">Payment Details</p>
-                                <div className="mt-5 relative"> <input className="input_number h-12 w-full border border-white transition-all rounded-lg px-2 outline-none focus:border-blue-900" type="text" placeholder="0000 0000 0000 0000" data-slots="0" data-accept="\d" size={19}/> <label className="text-xs absolute -top-4 left-0">Card Number</label> </div>
-                                <div className="mt-7 w-full flex gap-3">
-                                    <div className=" relative w-full">
-                                    <input className="input_expiry h-12 w-full border border-white transition-all rounded-lg px-2 outline-none focus:border-blue-900" placeholder="mm/yyyy" data-slots="my" type="text" /> <label className="text-xs absolute -top-4 left-0" >Expiry Date</label> </div>
-                                    <div className=" relative w-full">
-                                        <input className="input_cvv h-12 w-full border border-white transition-all rounded-lg px-2 outline-none focus:border-blue-900" type="text"  placeholder="000" data-slots="0" data-accept="\d" size={3}  /> <label className="text-xs absolute -top-4 left-0">CVV</label> </div>
-                                </div>
-                                <div className="mt-7 relative"> <input className="h-12 w-full border border-white transition-all rounded-lg px-2 outline-none focus:border-blue-900" type="text"/> <label className="text-xs absolute -top-4 left-0">Name on Card</label> </div>
+                            <form onSubmit={handleCreditCardSubmit}>
+                                <div className="bg-slate-300 rounded-r-md p-3">
+                                    <p className="mt-3 text-xl font-semibold">Payment Details</p>
+                                    <div className="mt-5 relative">
+                                    <input
+                                        required
+                                        id="cardNumber"
+                                        value={cardValues.cardNumber}
+                                        onChange={handleCardFormChanges}
+                                        className="input_number h-12 w-full border border-white transition-all rounded-lg px-2 outline-none focus:border-blue-900"
+                                        type="text"
+                                        placeholder="0000 0000 0000 0000"
+                                        data-slots="0"
+                                        data-accept="\d"
+                                        size={19}/>
+                                    <label className="text-xs absolute -top-4 left-0">Card Number</label> </div>
+                                    <div className="mt-7 w-full flex gap-3">
+                                        <div className=" relative w-full">
+                                        <input
+                                            required
+                                            id="expiryDate"
+                                            value={cardValues.expiryDate}
+                                            onChange={handleCardFormChanges}
+                                            className="input_expiry h-12 w-full border border-white transition-all rounded-lg px-2 outline-none focus:border-blue-900"
+                                            placeholder="mm/yyyy"
+                                            data-slots="my"
+                                            type="text" />
+                                        <label className="text-xs absolute -top-4 left-0" >Expiry Date</label> </div>
+                                        <div className=" relative w-full">
+                                            <input
+                                                required
+                                                id="cvv"
+                                                value={cardValues.cvv}
+                                                onChange={handleCardFormChanges}
+                                                className="input_cvv h-12 w-full border border-white transition-all rounded-lg px-2 outline-none focus:border-blue-900"
+                                                type="text"
+                                                placeholder="000"
+                                                data-slots="0"
+                                                data-accept="\d"
+                                                size={3}  /> <label className="text-xs absolute -top-4 left-0">CVV</label> </div>
+                                    </div>
+                                    <div className="mt-7 relative">
 
-                                <div className="mt-3 flex items-center">
-                                    <div className="">Amount due : </div>
-                                    <div className="ml-2 text-red-800 text-xl">{getTheTotalPrice()}</div>
-                                    <div className="text-[9px] ml-1">USD</div>
-                                </div>
+                                    <input
+                                        required
+                                        id="nameOnCard"
+                                        value={cardValues.nameOnCard}
+                                        onChange={handleCardFormChanges}
+                                        className="h-12 w-full border border-white transition-all rounded-lg px-2 outline-none focus:border-blue-900"
+                                        type="text"/> <label className="text-xs absolute -top-4 left-0">Name on Card</label> </div>
 
-                                <div className="mb-5">
-                                    <div className="flex items-center justify-center bg-green-500 text-white p-2 rounded-md mt-4 text-xl hover:cursor-pointer hover:bg-yellow-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                                        </svg>
-                                        <div>Pay Now</div>
+                                    <div className="mt-3 flex items-center">
+                                        <div className="">Amount due : </div>
+                                        <div className="ml-2 text-red-800 text-xl">{getTheTotalPrice()}</div>
+                                        <div className="text-[9px] ml-1">USD</div>
+                                    </div>
+
+                                    <div className="mb-5">
+                                        <button
+                                        className="w-full flex items-center justify-center bg-green-500 text-white p-2 rounded-md mt-4 text-xl hover:cursor-pointer hover:bg-yellow-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                              <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                            </svg>
+                                            <div>Pay Now</div>
+                                        </button>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
 
 
                         </div>
