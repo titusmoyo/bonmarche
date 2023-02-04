@@ -13,6 +13,9 @@ import {initFirebase} from "@lib/firebase_db/firebase_init";
 import { REALTIME_DATABASE_DB_PRODUCT_LIST, REALTIME_DATABASE_DB_TRENDING_LIST } from '@utils/constants/db_constants';
 import { REALTIME_DATABASE_DB_CART_PRODUCTS } from '@utils/constants/db_constants';
 import { getProductUsingSlug } from '@lib/firebase_db/firebase_read';
+import { validateCardNumber, isCardValidSoFar} from '@utils/functions/util';
+import { isCardExpired } from '@utils/functions/util';
+import { isCVVValid } from '@utils/functions/util';
 
 const CheckoutPage=()=>{
 
@@ -20,6 +23,9 @@ const CheckoutPage=()=>{
     const [ paymentOption, setPaymentOption] = useState(0);
     const [ cartProducts, setCartProducts ] = useState<PRODUCTMODEL[]>([]);
     const [ proda,setProda ] = useState<Record<string,PRODUCTMODEL>>({});
+    const [ showCardNumberError, setShowCardNumberError ] = useState(false);
+    const [ showCardExpiredError, setShowCardExpiredError ] = useState(false);
+    const [ showCVVError, setShowCVVError ] = useState(false);
 
     const [ cardValues, setCardValues] = useState({
       cardNumber:'',
@@ -88,6 +94,26 @@ const CheckoutPage=()=>{
 
     const handleCreditCardSubmit=async(e: { preventDefault: () => void; })=>{
         e.preventDefault();
+
+        if(!validateCardNumber(cardValues.cardNumber)){
+            setShowCardNumberError(true);
+            return;
+        }
+
+        // check if the card is expired
+        if(isCardExpired(cardValues.expiryDate)){
+            setShowCardExpiredError(true);
+            return;
+        }
+
+        // if Cvv is incorrect show error
+        if(!isCVVValid(cardValues.cvv)){
+            setShowCVVError(true);
+            return;
+        }
+
+
+
         console.log("credit card clicked ");
         console.log(cardValues);
         setCardValues({
@@ -155,6 +181,7 @@ const CheckoutPage=()=>{
                                         <p >Card Number</p>
                                         <p className="border-b-2 text-white shown_number">0000 0000 0000 0000</p>
                                     </div>
+
                                     <div className="flex gap-3 mt-3">
                                         <div className="p-2 mt-2 text-black font-semibold">
                                             <p >Expiry Date</p>
@@ -185,6 +212,12 @@ const CheckoutPage=()=>{
                                         data-accept="\d"
                                         size={19}/>
                                     <label className="text-xs absolute -top-4 left-0">Card Number</label> </div>
+
+                                    {/* Card Number Error */}
+                                    <div className={`${showCardNumberError ? "block":"hidden"} mt-1 text-red-500 text-xl`}>*The card number is invalid</div>
+                                    {/*End of Card Number Error*/}
+
+
                                     <div className="mt-7 w-full flex gap-3">
                                         <div className=" relative w-full">
                                         <input
@@ -210,6 +243,16 @@ const CheckoutPage=()=>{
                                                 data-accept="\d"
                                                 size={3}  /> <label className="text-xs absolute -top-4 left-0">CVV</label> </div>
                                     </div>
+
+                                    {/*Show Card Expired Error*/}
+                                    <div className={`${showCardExpiredError ? "block":"hidden"} mt-1 text-red-500 text-xl`}>*The card number expired</div>
+                                    {/**/}
+
+                                    {/*Show Card Expired Error*/}
+                                    <div className={`${showCVVError ? "block":"hidden"} mt-1 text-red-500 text-xl`}>*The CVV is invalid</div>
+                                    {/**/}
+
+
                                     <div className="mt-7 relative">
 
                                     <input
@@ -218,7 +261,7 @@ const CheckoutPage=()=>{
                                         value={cardValues.nameOnCard}
                                         onChange={handleCardFormChanges}
                                         className="h-12 w-full border border-white transition-all rounded-lg px-2 outline-none focus:border-blue-900"
-                                        type="text"/> <label className="text-xs absolute -top-4 left-0">Name on Card</label> </div>
+                                        type="text"/> <label className="text-sm absolute -top-5 left-0">Name on Card</label> </div>
 
                                     <div className="mt-3 flex items-center">
                                         <div className="">Amount due : </div>
