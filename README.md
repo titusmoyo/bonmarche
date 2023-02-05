@@ -8,17 +8,33 @@ Module  : EDI et Commerce Electronique
 
 BonMarche a consumer to consumer (c2c) e-commerce website that allows users to buy, sell and exchange new or used  phones and laptops.
 
-## Getting Started
+## Running this Project locally
 
-First, run the development server:
+First, clone this repo
+
+```bash
+git clone https://github.com/titusmoyo/bonmarche.git
+```
+
+Secondly cd into the project folder
+
+```bash
+cd bonmarche
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start the application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
+
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
