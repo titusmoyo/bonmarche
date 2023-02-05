@@ -10,13 +10,7 @@ BonMarche a consumer to consumer (c2c) e-commerce website that allows users to b
 
 ## Running this Project locally
 
-First, clone this repo
-
-```bash
-git clone https://github.com/titusmoyo/bonmarche.git
-```
-
-Secondly cd into the project folder
+Firstly cd into the project folder
 
 ```bash
 cd bonmarche
