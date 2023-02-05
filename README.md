@@ -1,6 +1,9 @@
 Batna 2 
+
 Master 2 CS Project 
+
 Teacher : Mr Betta Mohamed 
+
 Module  : EDI et Commerce Electronique
 
 BonMarche a consumer to consumer (c2c) e-commerce website that allows users to buy, sell and exchange new or used  phones and laptops.
