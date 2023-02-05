@@ -16,9 +16,12 @@ import { getProductUsingSlug } from '@lib/firebase_db/firebase_read';
 import { validateCardNumber, isCardValidSoFar} from '@utils/functions/util';
 import { isCardExpired } from '@utils/functions/util';
 import { isCVVValid } from '@utils/functions/util';
+import { publicKey } from '@utils/rsa_keys/keys';
+const NodeRSA = require('node-rsa');
+
 
 const CheckoutPage=()=>{
-
+    const router = useRouter();
     const {user,dbuser} = useAuth();
     const [ paymentOption, setPaymentOption] = useState(0);
     const [ cartProducts, setCartProducts ] = useState<PRODUCTMODEL[]>([]);
@@ -89,6 +92,13 @@ const CheckoutPage=()=>{
     const handleCardFormChanges = (e: { target: { id: any; value: any; }; }) => {
       const id = e.target.id;
       const newValue = e.target.value;
+
+      if(id==="cardNumber"){
+          if(isCardValidSoFar(cardValues.cardNumber)){
+              setShowCardNumberError(false);
+          }
+      }
+
       setCardValues({...cardValues, [id]: newValue });
     };
 
@@ -108,19 +118,49 @@ const CheckoutPage=()=>{
 
         // if Cvv is incorrect show error
         if(!isCVVValid(cardValues.cvv)){
-            setShowCVVError(true); 
+            setShowCVVError(true);
             return;
         }
 
-        console.log("credit card clicked ");
-        console.log(cardValues);
+        // encrypting card details and sending them to the server
+        doRSAEncryption(cardValues);
+
         setCardValues({
             cardNumber:'',
              expiryDate:'',
              cvv:'',
              nameOnCard:'',
          });
+
+         const goToHome = confirm(
+           'You details have been securely transfered to our server for processing, We will email you shortly',
+         );
+         if (goToHome) {
+             router.push('/auth/login/');
+         }
+         return;
+
     }
+
+    const doRSAEncryption = async (objectData:any)=>{
+        //const key = new NodeRSA({b: 512});
+        const key = new NodeRSA(publicKey);
+        const encrypted = key.encrypt(JSON.stringify(objectData), 'base64');
+        console.log('encrypted: ', encrypted);
+
+        const response = await fetch("/api/payments", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data:encrypted }),
+        });
+
+        const data = await response.json();
+        console.log(data);
+        console.log("results back")
+    }
+
 
     return(
         <Layout childType={CHECKOUT_PAGE_INDEX}>

@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import FullLogo from '@components/logo/full_logo';
 import Link from 'next/link';
 import axios from 'axios';
-import EncryptRsa from 'encrypt-rsa';
+import { publicKey } from '@utils/rsa_keys/keys';
+const NodeRSA = require('node-rsa');
 
 const RSA = () =>{
 
@@ -29,45 +30,29 @@ const RSA = () =>{
             return;
         }
 
-        console.log("handleSubmitData()");
-        console.log(values);
-
-        // create instance
-        const encryptRsa = new EncryptRsa();
-        //const { privateKey, publicKey } = encryptRsa.createPrivateAndPublicKeys();
-        //const { privateKey, publicKey } =;
-        const privateKey="asante_sane";
-        const publicKey="holy";
-
-        console.log("privateKey");
-        console.log(privateKey);
-        console.log("Public Key");
-        console.log(publicKey);
-
-        //const encryptedText = encryptRsa.encryptStringWithRsaPublicKey({text: 'hello world',publicKey,});
-
-        let newV={
-            firstName:encryptRsa.encryptStringWithRsaPublicKey({text: values.firstName,publicKey,}),
-            secondName:encryptRsa.encryptStringWithRsaPublicKey({text:values.secondName,publicKey,})
-        };
+        // RSA encryption
+        doRSAEncryption(values);
+    }//end of handleSubmitData
 
 
+    const doRSAEncryption = async (objectData:any)=>{
+        //const key = new NodeRSA({b: 512});
+        const key = new NodeRSA(publicKey);
+        const encrypted = key.encrypt(JSON.stringify(objectData), 'base64');
+        console.log('encrypted: ', encrypted);
 
         const response = await fetch("/api/payments", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ firstName:newV.firstName,secondName:newV.secondName }),
+          body: JSON.stringify({ data:encrypted }),
         });
 
         const data = await response.json();
-
         console.log(data);
-        console.log("results back");
-
-
-    }//end of handleSubmitData
+        console.log("results back")
+    }
 
     return(
         <div className="p-5">
