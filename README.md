@@ -1,4 +1,9 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Batna 2 
+Master 2 CS Project 
+Teacher : Mr Betta Mohamed 
+Module  : EDI et Commerce Electronique
+
+BonMarche a consumer to consumer (c2c) e-commerce website that allows users to buy, sell and exchange new or used  phones and laptops.
 
 ## Getting Started
 
