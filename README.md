@@ -6,7 +6,7 @@ Teacher : Mr Betta Mohamed
 
 Module  : EDI et Commerce Electronique
 
-<bold>BonMarche</bold> a consumer to consumer (c2c) e-commerce website that allows users to buy, sell and exchange new or used  phones and laptops.
+<b>BonMarche</b> a consumer to consumer (c2c) e-commerce website that allows users to buy, sell and exchange new or used  phones and laptops.
 
 ## Running this Project locally
 
