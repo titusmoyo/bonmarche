@@ -1,4 +1,5 @@
 
+import { PRODUCTMODEL } from '@models/model';
 
 /*
   returns the file size in MB
@@ -114,3 +115,19 @@ export const isCVVValid=(CVV_Number:string)=>{
         return false;
     }
 }
+
+
+export const filterProducts = (array:PRODUCTMODEL[], query:string) => {
+  let result:PRODUCTMODEL[] = [];
+  array.forEach(item => {
+    const matches = Object.values(item).filter((value) => {
+      if (typeof value === "string") {
+        return value.toLowerCase().includes(query.toLowerCase());
+      }
+    });
+    if (matches.length > 0) {
+      result.push(item);
+    }
+  });
+  return result;
+};

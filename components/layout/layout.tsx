@@ -47,8 +47,16 @@ const Layout = ({ children,childType }:{ children: ReactNode,childType:number}) 
         if(fq.length===0 || fq===null || fq===undefined){
             return;
         }
-        console.log("handleSubmit => handleSearchQuery");
-        console.log("q : "+values.searchQuery);
+        //console.log("handleSubmit => handleSearchQuery");
+        //console.log("q : "+values.searchQuery);
+
+        router.push({
+            pathname: '/',
+            query: {
+                fr:true,
+                q:values.searchQuery,
+            },
+        })
     }
 
      /* Complete Code */
