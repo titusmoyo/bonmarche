@@ -213,7 +213,7 @@ const CheckoutPage=()=>{
                         <div className="grid grid-cols-1 md:grid-cols-2">
 
                             <div className="relative">
-                                <img className="h-full w-full rounded-l-md" src="https://imgur.com/cOwXXFq.jpg"/>
+                                <img className="h-full w-full rounded-l-md" src="/images/card_back.jpg"/>
                                 <div className="h-48 w-72 opacity-70 rounded-lg  bg-blue-300 absolute top-10 md:top-28 left-8 ">
                                     <div className="p-2 mt-3 text-black font-semibold">
                                         <p >Card Number</p>

@@ -23,7 +23,7 @@ const CheckoutPage=()=>{
                         <div className="flex h-full w-full ">
 
                             <div className="left_side truncate relative rounded-l-lg h-auto w-full truncate">
-                                <img className="h-full w-full" src="https://imgur.com/cOwXXFq.jpg"/>
+                                <img className="h-full w-full" src="/images/card_back.jpg"/>
                                 <div className="h-48 w-72 opacity-70 rounded-lg  bg-blue-300 absolute top-28 left-8 ">
                                     <div className="p-2 mt-3 text-black font-semibold">
                                         <p >Card Number</p>
